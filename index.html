@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>一口一个小蛋糕 | 个人主页</title>
+  <!-- Tailwind CSS v3 -->
+  <script src="tailwindcss.js"></script>
+  <!-- Lucide 图标库 -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          // 低饱和主色，高级不刺眼
+          colors: {
+            primary: '#4F46E5',
+            neutral: {
+              100: '#F5F7FA',
+              200: '#E4E7EC',
+              500: '#667085',
+              700: '#344054',
+              900: '#101828'
+            }
+          },
+          // 主流热门无衬线字体 Inter
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          // 统一圆角、阴影（现代UI标准参数）
+          borderRadius: {
+            'md': '8px',
+            'lg': '12px'
+          },
+          boxShadow: {
+            soft: '0 1px 2px rgba(0, 0, 0, 0.06)',
+            hover: '0 4px 12px rgba(0, 0, 0, 0.08)'
+          }
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    /* 全局平滑滚动 */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* 全局基础样式 */
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #F5F7FA;
+      color: #344054;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* 图片缩放动效 */
+    .scale-hover {
+      overflow: hidden;
+      transition: all 0.2s ease-out;
+    }
+    .scale-hover img {
+      transition: transform 0.3s ease-out;
+    }
+    .scale-hover:hover img {
+      transform: scale(1.05);
+    }
+    /* 默认隐藏的作品项 */
+    .gallery-hidden, .video-hidden, .music-hidden {
+      display: none;
+    }
+    .gallery-hidden.show, .video-hidden.show, .music-hidden.show {
+      display: block;
+    }
+    /* 卡片悬浮动效 */
+    .card-hover {
+      transition: all 0.2s ease-out;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    }
+    .card-hover:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+    /* 图集封面容器 - 适配1500×2000 (3:4) 竖屏图片 */
+    .gallery-cover-container {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background-color: #F5F7FA;
+    }
+    .gallery-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+  </head>
+<body>
+  <!-- 顶部导航 极简半透风格 -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-soft">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#home" class="text-xl font-semibold text-neutral-900">Creator</a>
+        <!-- 桌面端导航 -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#home" class="text-neutral-500 hover:text-primary transition-colors">首页</a>
+          <a href="#about" class="text-neutral-500 hover:text-primary transition-colors">关于我</a>
+          <a href="#video" class="text-neutral-500 hover:text-primary transition-colors">视频</a>
+          <a href="#gallery" class="text-neutral-500 hover:text-primary transition-colors">图片</a>
+          <a href="#music" class="text-neutral-500 hover:text-primary transition-colors">音乐</a>
+          <a href="#ai" class="text-neutral-500 hover:text-primary transition-colors">AI创作</a>
+          <a href="#contact" class="text-neutral-500 hover:text-primary transition-colors">联系</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 首页 Hero 区 大留白布局 -->
+  <section id="home" class="pt-40 pb-32 min-h-screen flex items-center justify-center">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-neutral-900 leading-tight mb-6">
+        你好，我是 <span class="text-primary">小崔</span>
+      </h1>
+      <p class="text-lg md:text-xl text-neutral-500 mb-12 leading-relaxed">
+        以内容为媒介，用画面、影像与旋律表达灵感
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#video" class="px-8 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors">
+          浏览作品
+        </a>
+        <a href="#contact" class="px-8 py-3 border border-neutral-200 rounded-md hover:border-primary hover:text-primary transition-colors">
+          合作交流
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于我 -->
+  <section id="about" class="py-28 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-neutral-900 mb-3">关于我</h2>
+        <div class="w-12 h-0.5 bg-primary/60 mx-auto rounded-full"></div>
+      </div>
+      <div class="md:flex items-center gap-16">
+        <div class="flex-shrink-0 mx-auto md:mx-0 mb-10 md:mb-0">
+          <div class="w-56 h-56 rounded-lg overflow-hidden shadow-soft">
+            <img src="https://file.garden/aiKTxQW0TE9uaxk7/touxiang.jpg" alt="个人头像" class="w-full h-full object-cover">
+          </div>
+        </div>
+        <div class="flex-1">
+          <p class="text-lg leading-relaxed mb-6">
+            一名专注视觉影像与音频创作的内容创作者。热衷于捕捉生活瞬间，深耕摄影、短片制作与原创音乐领域，坚持用心打磨每一份作品。
+          </p>
+          <p class="text-lg leading-relaxed mb-4">
+            乐于交流分享，接受商务合作与创作联动，期待与同路人相遇。
+          </p>
+          <p class="text-neutral-500 mb-6">点击观看与下载我的pdf简历</p>
+          <a href="https://file.garden/aiKTxQW0TE9uaxk7/%E5%B0%8F%E5%B4%94%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86.pdf" target="_blank" class="inline-flex justify-center items-center gap-2 px-6 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors mb-6 min-w-[100px] bottom-0">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+            <span>点击此处</span>
+          </a>
+          <div class="flex flex-wrap gap-3">
+            <span class="px-3 py-1 bg-neutral-100 rounded-md text-sm text-neutral-700">图文创作</span>
+            <span class="px-3 py-1 bg-neutral-100 rounded-md text-sm text-neutral-700">视频摄制</span>
+            <span class="px-3 py-1 bg-neutral-100 rounded-md text-sm text-neutral-700">音频制作</span>
+            <span class="px-3 py-1 bg-primary/10 rounded-md text-sm text-primary">AI创作</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 视频作品 适配外部托管/iframe链接 -->
+  <section id="video" class="py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-neutral-900 mb-3">视频作品</h2>
+        <div class="w-12 h-0.5 bg-primary/60 mx-auto rounded-full"></div>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="videoGrid">
+        <!-- 封面区域可替换为视频托管封面/iframe -->
+        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
+          <div class="aspect-[3/4] flex items-center justify-center bg-neutral-200">
+            <i data-lucide="play-circle" class="w-14 h-14 text-primary/70"></i>
+          </div>
+          <div class="p-5">
+            <h3 class="font-medium text-neutral-900 mb-2">视频标题</h3>
+            <p class="text-sm text-neutral-500">作品简介 · 创作主题</p>
+          </div>
+        </div>
+        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
+          <div class="aspect-[3/4] flex items-center justify-center bg-neutral-200">
+            <i data-lucide="play-circle" class="w-14 h-14 text-primary/70"></i>
+          </div>
+          <div class="p-5">
+            <h3 class="font-medium text-neutral-900 mb-2">视频标题</h3>
+            <p class="text-sm text-neutral-500">作品简介 · 创作主题</p>
+          </div>
+        </div>
+        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
+          <div class="aspect-[3/4] flex items-center justify-center bg-neutral-200">
+            <i data-lucide="play-circle" class="w-14 h-14 text-primary/70"></i>
+          </div>
+          <div class="p-5">
+            <h3 class="font-medium text-neutral-900 mb-2">视频标题</h3>
+            <p class="text-sm text-neutral-500">作品简介 · 创作主题</p>
+          </div>
+        </div>
+        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
+          <div class="aspect-[3/4] flex items-center justify-center bg-neutral-200">
+            <i data-lucide="play-circle" class="w-14 h-14 text-primary/70"></i>
+          </div>
+          <div class="p-5">
+            <h3 class="font-medium text-neutral-900 mb-2">视频标题</h3>
+            <p class="text-sm text-neutral-500">作品简介 · 创作主题</p>
+          </div>
+        </div>
+        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
+          <div class="aspect-[3/4] flex items-center justify-center bg-neutral-200">
+            <i data-lucide="play-circle" class="w-14 h-14 text-primary/70"></i>
+          </div>
+          <div class="p-5">
+            <h3 class="font-medium text-neutral-900 mb-2">视频标题</h3>
+            <p class="text-sm text-neutral-500">作品简介 · 创作主题</p>
+          </div>
+        </div>
+        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
+          <div class="aspect-[3/4] flex items-center justify-center bg-neutral-200">
+            <i data-lucide="play-circle" class="w-14 h-14 text-primary/70"></i>
+          </div>
+          <div class="p-5">
+            <h3 class="font-medium text-neutral-900 mb-2">视频标题</h3>
+            <p class="text-sm text-neutral-500">作品简介 · 创作主题</p>
+          </div>
+        </div>
+        <!-- 更多视频 - 默认隐藏 -->
+        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100 video-hidden">
+          <div class="aspect-[3/4] flex items-center justify-center bg-neutral-200">
+            <i data-lucide="play-circle" class="w-14 h-14 text-primary/70"></i>
+          </div>
+          <div class="p-5">
+            <h3 class="font-medium text-neutral-900 mb-2">视频标题</h3>
+            <p class="text-sm text-neutral-500">作品简介 · 创作主题</p>
+          </div>
+        </div>
+        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100 video-hidden">
+          <div class="aspect-[3/4] flex items-center justify-center bg-neutral-200">
+            <i data-lucide="play-circle" class="w-14 h-14 text-primary/70"></i>
+          </div>
+          <div class="p-5">
+            <h3 class="font-medium text-neutral-900 mb-2">视频标题</h3>
+            <p class="text-sm text-neutral-500">作品简介 · 创作主题</p>
+          </div>
+        </div>
+        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100 video-hidden">
+          <div class="aspect-[3/4] flex items-center justify-center bg-neutral-200">
+            <i data-lucide="play-circle" class="w-14 h-14 text-primary/70"></i>
+          </div>
+          <div class="p-5">
+            <h3 class="font-medium text-neutral-900 mb-2">视频标题</h3>
+            <p class="text-sm text-neutral-500">作品简介 · 创作主题</p>
+          </div>
+        </div>
+      </div>
+      <!-- 展开/收起按钮 -->
+      <div class="text-center mt-8">
+        <button id="videoToggle" class="px-6 py-2 text-primary hover:bg-primary/10 rounded-md transition-colors flex items-center gap-2 mx-auto">
+          <span>查看更多</span>
+          <i data-lucide="chevron-down" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 图片作品 适配外部托管链接 -->
+  <section id="gallery" class="py-28 bg-neutral-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-neutral-900 mb-3">图片作品</h2>
+        <div class="w-12 h-0.5 bg-primary/60 mx-auto rounded-full"></div>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="galleryGrid">
+        <!-- 图集封面 - 点击跳转到详情页 -->
+        <a href="gallery-detail.html" class="scale-hover rounded-lg overflow-hidden bg-white card-hover block">
+          <div class="gallery-cover-container">
+            <img src="https://i.ibb.co/cKTjkmYG/image.jpg" alt="kb 沥水卷帘" class="gallery-cover-img">
+          </div>
+          <div class="p-4 bg-white">
+            <h3 class="font-medium text-neutral-900 text-sm">kb 沥水卷帘</h3>
+            <p class="text-xs text-neutral-500 mt-1">27张图片</p>
+          </div>
+        </a>
+        <!-- 第二个图集 -->
+        <a href="gallery-detail2.html" class="scale-hover rounded-lg overflow-hidden bg-white card-hover block">
+          <div class="gallery-cover-container">
+            <img src="https://i.ibb.co/SD9v0Jrw/26.jpg" alt="bm 活底披萨烤盘" class="gallery-cover-img">
+          </div>
+          <div class="p-4 bg-white">
+            <h3 class="font-medium text-neutral-900 text-sm">bm 活底披萨烤盘</h3>
+            <p class="text-xs text-neutral-500 mt-1">28张图片</p>
+          </div>
+        </a>
+        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
+          <img src="https://picsum.photos/600/600?random=21" alt="作品" class="w-full h-56 object-cover">
+        </div>
+        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
+          <img src="https://picsum.photos/600/600?random=22" alt="作品" class="w-full h-56 object-cover">
+        </div>
+        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
+          <img src="https://picsum.photos/600/600?random=23" alt="作品" class="w-full h-56 object-cover">
+        </div>
+        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
+          <img src="https://picsum.photos/600/600?random=24" alt="作品" class="w-full h-56 object-cover">
+        </div>
+        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
+          <img src="https://picsum.photos/600/600?random=25" alt="作品" class="w-full h-56 object-cover">
+        </div>
+        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
+          <img src="https://picsum.photos/600/600?random=26" alt="作品" class="w-full h-56 object-cover">
+        </div>
+        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
+          <img src="https://picsum.photos/600/600?random=27" alt="作品" class="w-full h-56 object-cover">
+        </div>
+        <!-- 更多图片 - 默认隐藏 -->
+        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover gallery-hidden">
+          <img src="https://picsum.photos/600/600?random=28" alt="作品" class="w-full h-56 object-cover">
+        </div>
+        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover gallery-hidden">
+          <img src="https://picsum.photos/600/600?random=29" alt="作品" class="w-full h-56 object-cover">
+        </div>
+        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover gallery-hidden">
+          <img src="https://picsum.photos/600/600?random=30" alt="作品" class="w-full h-56 object-cover">
+        </div>
+        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover gallery-hidden">
+          <img src="https://picsum.photos/600/600?random=31" alt="作品" class="w-full h-56 object-cover">
+        </div>
+      </div>
+      <!-- 展开/收起按钮 -->
+      <div class="text-center mt-8">
+        <button id="galleryToggle" class="px-6 py-2 text-primary hover:bg-primary/10 rounded-md transition-colors flex items-center gap-2 mx-auto">
+          <span>查看更多</span>
+          <i data-lucide="chevron-down" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 音乐作品 适配音频托管链接 -->
+  <section id="music" class="py-28 bg-neutral-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-neutral-900 mb-3">音乐作品</h2>
+        <div class="w-12 h-0.5 bg-primary/60 mx-auto rounded-full"></div>
+      </div>
+      <div class="space-y-4">
+        <!-- 第一首歌 - 带音频链接 -->
+        <div class="flex items-center gap-5 p-5 bg-white rounded-lg card-hover">
+          <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-medium text-neutral-900">210</h4>
+            <p class="text-sm text-neutral-500">原创音乐</p>
+          </div>
+          <!-- 原生HTML5音频播放器 -->
+          <div class="flex-shrink-0 w-full max-w-xs sm:max-w-sm mx-auto">
+            <audio controls src="https://file.garden/aiKTxQW0TE9uaxk7/music/210.mp3" class="w-full">
+          </div>
+        </div>
+        <!-- 第二首歌 -->
+        <div class="flex items-center gap-5 p-5 bg-white rounded-lg card-hover">
+          <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-medium text-neutral-900">曲目名称 02</h4>
+            <p class="text-sm text-neutral-500">曲风 / 创作时间</p>
+          </div>
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <button class="w-10 h-10 rounded-full bg-neutral-100 text-neutral-500 flex items-center justify-center hover:bg-neutral-200 transition-colors" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </button>
+          </div>
+        </div>
+        <!-- 第三首歌 -->
+        <div class="flex items-center gap-5 p-5 bg-white rounded-lg card-hover">
+          <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-medium text-neutral-900">曲目名称 03</h4>
+            <p class="text-sm text-neutral-500">曲风 / 创作时间</p>
+          </div>
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <button class="w-10 h-10 rounded-full bg-neutral-100 text-neutral-500 flex items-center justify-center hover:bg-neutral-200 transition-colors" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </button>
+          </div>
+        </div>
+        <!-- 第四首歌 -->
+        <div class="flex items-center gap-5 p-5 bg-white rounded-lg card-hover">
+          <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-medium text-neutral-900">曲目名称 04</h4>
+            <p class="text-sm text-neutral-500">曲风 / 创作时间</p>
+          </div>
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <button class="w-10 h-10 rounded-full bg-neutral-100 text-neutral-500 flex items-center justify-center hover:bg-neutral-200 transition-colors" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </button>
+          </div>
+        </div>
+        <!-- 第五首歌 -->
+        <div class="flex items-center gap-5 p-5 bg-white rounded-lg card-hover">
+          <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-medium text-neutral-900">曲目名称 05</h4>
+            <p class="text-sm text-neutral-500">曲风 / 创作时间</p>
+          </div>
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <button class="w-10 h-10 rounded-full bg-neutral-100 text-neutral-500 flex items-center justify-center hover:bg-neutral-200 transition-colors" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </button>
+          </div>
+        </div>
+        <!-- 第六首歌 -->
+        <div class="flex items-center gap-5 p-5 bg-white rounded-lg card-hover">
+          <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-medium text-neutral-900">曲目名称 06</h4>
+            <p class="text-sm text-neutral-500">曲风 / 创作时间</p>
+          </div>
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <button class="w-10 h-10 rounded-full bg-neutral-100 text-neutral-500 flex items-center justify-center hover:bg-neutral-200 transition-colors" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </button>
+          </div>
+        </div>
+        <!-- 更多音乐 - 默认隐藏 -->
+        <div class="flex items-center gap-5 p-5 bg-white rounded-lg card-hover music-hidden">
+          <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-medium text-neutral-900">曲目名称 07</h4>
+            <p class="text-sm text-neutral-500">曲风 / 创作时间</p>
+          </div>
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <button class="w-10 h-10 rounded-full bg-neutral-100 text-neutral-500 flex items-center justify-center hover:bg-neutral-200 transition-colors" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex items-center gap-5 p-5 bg-white rounded-lg card-hover music-hidden">
+          <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-medium text-neutral-900">曲目名称 08</h4>
+            <p class="text-sm text-neutral-500">曲风 / 创作时间</p>
+          </div>
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <button class="w-10 h-10 rounded-full bg-neutral-100 text-neutral-500 flex items-center justify-center hover:bg-neutral-200 transition-colors" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- 展开/收起按钮 -->
+      <div class="text-center mt-8">
+        <button id="musicToggle" class="px-6 py-2 text-primary hover:bg-primary/10 rounded-md transition-colors flex items-center gap-2 mx-auto">
+          <span>查看更多</span>
+          <i data-lucide="chevron-down" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI创作作品 -->
+  <section id="ai" class="py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-neutral-900 mb-3">AI创作</h2>
+        <div class="w-12 h-0.5 bg-primary/60 mx-auto rounded-full"></div>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
+          <div class="aspect-square bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-8">
+            <div class="text-center">
+              <i data-lucide="video" class="w-16 h-16 text-primary mx-auto mb-4"></i>
+              <h3 class="font-medium text-neutral-900 mb-2">AI视频生成</h3>
+              <p class="text-sm text-neutral-500">利用AI技术快速生成视频内容</p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
+          <div class="aspect-square bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-8">
+            <div class="text-center">
+              <i data-lucide="headphones" class="w-16 h-16 text-primary mx-auto mb-4"></i>
+              <h3 class="font-medium text-neutral-900 mb-2">AI音乐生成</h3>
+              <p class="text-sm text-neutral-500">AI辅助音乐创作与编曲</p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
+          <div class="aspect-square bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-8">
+            <div class="text-center">
+              <i data-lucide="code" class="w-16 h-16 text-primary mx-auto mb-4"></i>
+              <h3 class="font-medium text-neutral-900 mb-2">AI代码生成</h3>
+              <p class="text-sm text-neutral-500">此网站就是使用AI生成的</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系我 -->
+  <section id="contact" class="py-28 bg-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-3">联系我</h2>
+      <div class="w-12 h-0.5 bg-primary/60 mx-auto rounded-full mb-8"></div>
+      <p class="text-lg text-neutral-500 mb-12">作品交流   商务合作  欢迎沟通</p>
+      <div class="flex justify-center gap-10">
+        <a href="#" class="text-neutral-500 hover:text-primary transition-colors">
+          <i data-lucide="mail" class="w-8 h-8"></i>
+        </a>
+        <a href="#" class="text-neutral-500 hover:text-primary transition-colors">
+          <i data-lucide="message-circle" class="w-8 h-8"></i>
+        </a>
+        <a href="#" class="text-neutral-500 hover:text-primary transition-colors">
+          <i data-lucide="video" class="w-8 h-8"></i>
+        </a>
+      </div>
+      <!-- 二维码 -->
+      <div class="mt-12">
+        <p class="text-sm text-neutral-500 mb-4">扫码添加微信</p>
+        <img src="https://i.ibb.co/RTCMS9BX/IMG-C1-D6-DBB42425-1.jpg" alt="二维码" class="w-40 h-40 mx-auto rounded-lg shadow-soft">
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="py-10 bg-neutral-900 text-center">
+    <p class="text-neutral-400 text-sm">© 2026 小崔Stdio · Power By AI</p>
+  </footer>
+
+  <!-- 初始化 Lucide 图标 -->
+  <script>
+    lucide.createIcons();
+    // 导航栏滚动样式微调
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 60) {
+        nav.classList.add('shadow-hover');
+      } else {
+        nav.classList.remove('shadow-hover');
+      }
+    });
+    
+    // 作品展开/收起功能
+    // 图片作品
+    const galleryToggle = document.getElementById('galleryToggle');
+    const galleryHiddenItems = document.querySelectorAll('.gallery-hidden');
+    galleryToggle?.addEventListener('click', () => {
+      galleryHiddenItems.forEach(item => {
+        item.classList.toggle('show');
+      });
+      const span = galleryToggle.querySelector('span');
+      const icon = galleryToggle.querySelector('i');
+      if(span && icon) {
+        if(galleryHiddenItems[0]?.classList.contains('show')) {
+          span.textContent = '收起';
+          icon.classList.add('rotate-180');
+        } else {
+          span.textContent = '查看更多';
+          icon.classList.remove('rotate-180');
+        }
+      }
+    });
+    
+    // 视频作品
+    const videoToggle = document.getElementById('videoToggle');
+    const videoHiddenItems = document.querySelectorAll('.video-hidden');
+    videoToggle?.addEventListener('click', () => {
+      videoHiddenItems.forEach(item => {
+        item.classList.toggle('show');
+      });
+      const span = videoToggle.querySelector('span');
+      const icon = videoToggle.querySelector('i');
+      if(span && icon) {
+        if(videoHiddenItems[0]?.classList.contains('show')) {
+          span.textContent = '收起';
+          icon.classList.add('rotate-180');
+        } else {
+          span.textContent = '查看更多';
+          icon.classList.remove('rotate-180');
+        }
+      }
+    });
+    
+    // 音乐作品
+    const musicToggle = document.getElementById('musicToggle');
+    const musicHiddenItems = document.querySelectorAll('.music-hidden');
+    musicToggle?.addEventListener('click', () => {
+      musicHiddenItems.forEach(item => {
+        item.classList.toggle('show');
+      });
+      const span = musicToggle.querySelector('span');
+      const icon = musicToggle.querySelector('i');
+      if(span && icon) {
+        if(musicHiddenItems[0]?.classList.contains('show')) {
+          span.textContent = '收起';
+          icon.classList.add('rotate-180');
+        } else {
+          span.textContent = '查看更多';
+          icon.classList.remove('rotate-180');
+        }
+      }
+    });
+  </script>
+</body>
+</html>
