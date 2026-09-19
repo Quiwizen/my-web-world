@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>图集详情 | 小崔</title>
+  <!-- Tailwind CSS v3 -->
+  <script src="tailwindcss.js"></script>
+  <!-- Lucide 图标库 -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4F46E5',
+            neutral: {
+              100: '#F5F7FA',
+              200: '#E4E7EC',
+              500: '#667085',
+              700: '#344054',
+              900: '#101828'
+            }
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          borderRadius: {
+            'md': '8px',
+            'lg': '12px'
+          },
+          boxShadow: {
+            soft: '0 1px 2px rgba(0, 0, 0, 0.06)',
+            hover: '0 4px 12px rgba(0, 0, 0, 0.08)'
+          }
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #F5F7FA;
+      color: #344054;
+      overflow-x: hidden;
+    }
+    .back-btn:hover {
+      transform: translateX(-4px);
+    }
+    .nav-btn {
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background-color: rgba(79, 70, 229, 0.1);
+      color: #4F46E5;
+    }
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .float-nav-btn {
+      opacity: 0.7;
+      transition: all 0.2s ease;
+    }
+    .float-nav-btn:hover:not(:disabled) {
+      opacity: 1;
+      transform: translateY(-50%) scale(1.1);
+    }
+    .float-nav-btn:disabled {
+      opacity: 0.3 !important;
+      cursor: not-allowed;
+    }
+    /* 竖屏图片容器 (3:4 比例) */
+    .portrait-container {
+      aspect-ratio: 3/4;
+      max-height: 75vh;
+      background-color: #F5F7FA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .portrait-container img {
+      object-fit: contain;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    /* 缩略图样式 */
+    .thumbnail-btn {
+      width: 100% !important;
+      height: auto !important;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+    }
+    .thumbnail-btn img {
+      object-fit: cover;
+    }
+    /* 缩略图容器滚动条样式 */
+    #thumbnailContainer {
+      scrollbar-width: thin;
+      scrollbar-color: #4F46E5 #E4E7EC;
+    }
+    #thumbnailContainer::-webkit-scrollbar {
+      width: 6px;
+    }
+    #thumbnailContainer::-webkit-scrollbar-track {
+      background: #E4E7EC;
+      border-radius: 3px;
+    }
+    #thumbnailContainer::-webkit-scrollbar-thumb {
+      background: #4F46E5;
+      border-radius: 3px;
+    }
+    #thumbnailContainer::-webkit-scrollbar-thumb:hover {
+      background: #4338CA;
+    }
+  </style>
+</head>
+<body>
+  <!-- 返回按钮 -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-soft">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html#gallery" class="flex items-center gap-2 text-neutral-700 hover:text-primary transition-colors back-btn">
+          <i data-lucide="arrow-left" class="w-5 h-5"></i>
+          <span>返回作品集</span>
+        </a>
+        <!-- 标题和图片数 -->
+        <div class="text-center">
+          <h1 class="text-lg font-bold text-neutral-900">kb 沥水卷帘</h1>
+          <p class="text-xs text-neutral-500">共 27 张图片</p>
+        </div>
+        <!-- 占位符保持居中 -->
+        <div class="w-28"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主图展示区 -->
+    <section class="pt-20 pb-6 bg-neutral-100">
+      <div class="max-w-6xl mx-auto px-4 flex flex-col lg:flex-row items-start gap-6">
+        <!-- 左侧主图区域 -->
+        <div class="flex-1 flex flex-col items-center w-full">
+          <!-- 图片展示 -->
+          <div class="relative rounded-lg overflow-hidden shadow-soft mb-6 portrait-container w-full max-w-2xl" id="imageContainer">
+            <img id="mainImage" src="https://i.ibb.co/cKTjkmYG/image.jpg" alt="image" loading="eager">
+            <!-- 左侧悬浮导航按钮 -->
+            <button id="floatPrevBtn" class="float-nav-btn absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white shadow-lg" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <!-- 右侧悬浮导航按钮 -->
+            <button id="floatNextBtn" class="float-nav-btn absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- 导航按钮 -->
+          <div class="flex justify-center items-center gap-4">
+            <button id="prevBtn" class="nav-btn px-4 py-2 rounded-md border border-neutral-200 disabled" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <span id="counter" class="text-neutral-500">1 / 27</span>
+            <button id="nextBtn" class="nav-btn px-4 py-2 rounded-md border border-neutral-200">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 右侧缩略图区域 -->
+        <div class="w-20 lg:w-24 flex-shrink-0">
+          <!-- 缩略图导航 - 纵向排列 -->
+          <div class="flex flex-col gap-2 overflow-y-auto max-h-[70vh]" id="thumbnailContainer">
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-primary" data-index="0">
+              <img src="https://i.ibb.co/cKTjkmYG/image.jpg" alt="image" class="w-full h-full object-cover" loading="eager">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="1">
+              <img src="https://i.ibb.co/xq0cW51g/1.jpg" alt="1" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="2">
+              <img src="https://i.ibb.co/9mfrJVmZ/3.jpg" alt="3" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="3">
+              <img src="https://i.ibb.co/wrwSN4WX/2.jpg" alt="2" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="4">
+              <img src="https://i.ibb.co/1fGyWHSV/5.jpg" alt="5" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="5">
+              <img src="https://i.ibb.co/5xsFB2LV/4.jpg" alt="4" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="6">
+              <img src="https://i.ibb.co/Wvh22rB2/6.jpg" alt="6" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="7">
+              <img src="https://i.ibb.co/Xf1jJ4FH/7.jpg" alt="7" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="8">
+              <img src="https://i.ibb.co/j9wNh8ks/8.jpg" alt="8" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="9">
+              <img src="https://i.ibb.co/G39KYhWN/9.jpg" alt="9" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="10">
+              <img src="https://i.ibb.co/C3S0wSJs/11.jpg" alt="11" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="11">
+              <img src="https://i.ibb.co/WpkPtrkW/10.jpg" alt="10" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="12">
+              <img src="https://i.ibb.co/jv2LNHkn/12.jpg" alt="12" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="13">
+              <img src="https://i.ibb.co/mr4GZq28/13.jpg" alt="13" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="14">
+              <img src="https://i.ibb.co/TxT2nbDb/14.jpg" alt="14" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="15">
+              <img src="https://i.ibb.co/M520FjWD/15.jpg" alt="15" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="16">
+              <img src="https://i.ibb.co/nqnBhkTm/16.jpg" alt="16" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="17">
+              <img src="https://i.ibb.co/YBkmWxmL/17.jpg" alt="17" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="18">
+              <img src="https://i.ibb.co/Y7xk9pwZ/18.jpg" alt="18" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="19">
+              <img src="https://i.ibb.co/WWGdPLZ5/19.jpg" alt="19" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="20">
+              <img src="https://i.ibb.co/k6r1YBRQ/20.jpg" alt="20" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="21">
+              <img src="https://i.ibb.co/YT77zH6H/21.jpg" alt="21" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="22">
+              <img src="https://i.ibb.co/7df3B5K6/22.jpg" alt="22" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="23">
+              <img src="https://i.ibb.co/LfTyYVb/23.jpg" alt="23" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="24">
+              <img src="https://i.ibb.co/b5Hz8ZXb/24.jpg" alt="24" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="25">
+              <img src="https://i.ibb.co/604M4pVX/25.jpg" alt="25" class="w-full h-full object-cover" loading="lazy">
+            </button>
+            <button class="thumbnail-btn flex-shrink-0 w-full rounded-md overflow-hidden border-2 border-transparent hover:border-neutral-300" data-index="26">
+              <img src="https://i.ibb.co/k6xyTCrn/26.jpg" alt="26" class="w-full h-full object-cover" loading="lazy">
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- 页脚 -->
+  <footer class="py-4 bg-neutral-900 text-center">
+    <p class="text-neutral-500 text-xs">© 2026 小崔Stdio</p>
+  </footer>
+
+  <script>
+    // 页面加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+      // 图片数组
+      const images = [
+        'https://i.ibb.co/cKTjkmYG/image.jpg',
+        'https://i.ibb.co/xq0cW51g/1.jpg',
+        'https://i.ibb.co/9mfrJVmZ/3.jpg',
+        'https://i.ibb.co/wrwSN4WX/2.jpg',
+        'https://i.ibb.co/1fGyWHSV/5.jpg',
+        'https://i.ibb.co/5xsFB2LV/4.jpg',
+        'https://i.ibb.co/Wvh22rB2/6.jpg',
+        'https://i.ibb.co/Xf1jJ4FH/7.jpg',
+        'https://i.ibb.co/j9wNh8ks/8.jpg',
+        'https://i.ibb.co/G39KYhWN/9.jpg',
+        'https://i.ibb.co/C3S0wSJs/11.jpg',
+        'https://i.ibb.co/WpkPtrkW/10.jpg',
+        'https://i.ibb.co/jv2LNHkn/12.jpg',
+        'https://i.ibb.co/mr4GZq28/13.jpg',
+        'https://i.ibb.co/TxT2nbDb/14.jpg',
+        'https://i.ibb.co/M520FjWD/15.jpg',
+        'https://i.ibb.co/nqnBhkTm/16.jpg',
+        'https://i.ibb.co/YBkmWxmL/17.jpg',
+        'https://i.ibb.co/Y7xk9pwZ/18.jpg',
+        'https://i.ibb.co/WWGdPLZ5/19.jpg',
+        'https://i.ibb.co/k6r1YBRQ/20.jpg',
+        'https://i.ibb.co/YT77zH6H/21.jpg',
+        'https://i.ibb.co/7df3B5K6/22.jpg',
+        'https://i.ibb.co/LfTyYVb/23.jpg',
+        'https://i.ibb.co/b5Hz8ZXb/24.jpg',
+        'https://i.ibb.co/604M4pVX/25.jpg',
+        'https://i.ibb.co/k6xyTCrn/26.jpg'
+      ];
+
+      const mainImage = document.getElementById('mainImage');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const floatPrevBtn = document.getElementById('floatPrevBtn');
+      const floatNextBtn = document.getElementById('floatNextBtn');
+      const counter = document.getElementById('counter');
+      const thumbnailBtns = document.querySelectorAll('.thumbnail-btn');
+
+      let currentIndex = 0;
+
+      function updateImage() {
+        mainImage.src = images[currentIndex];
+        counter.textContent = (currentIndex + 1) + ' / ' + images.length;
+        
+        // 更新缩略图选中状态
+        thumbnailBtns.forEach(function(btn, index) {
+          if (index === currentIndex) {
+            btn.classList.add('border-primary');
+            btn.classList.remove('border-transparent');
+            // 自动滚动到当前选中的缩略图
+            btn.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+              inline: 'center'
+            });
+          } else {
+            btn.classList.remove('border-primary');
+            btn.classList.add('border-transparent');
+          }
+        });
+
+        // 更新按钮状态
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === images.length - 1;
+        floatPrevBtn.disabled = currentIndex === 0;
+        floatNextBtn.disabled = currentIndex === images.length - 1;
+      }
+
+      // 下一张
+      function goNext() {
+        if (currentIndex < images.length - 1) {
+          currentIndex++;
+          updateImage();
+        }
+      }
+
+      // 上一张
+      function goPrev() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateImage();
+        }
+      }
+
+      // 绑定事件
+      prevBtn.addEventListener('click', goPrev);
+      nextBtn.addEventListener('click', goNext);
+      floatPrevBtn.addEventListener('click', goPrev);
+      floatNextBtn.addEventListener('click', goNext);
+
+      // 缩略图点击事件
+      thumbnailBtns.forEach(function(btn, index) {
+        btn.addEventListener('click', function() {
+          currentIndex = index;
+          updateImage();
+        });
+      });
+
+      // 键盘导航
+      document.addEventListener('keydown', function(e) {
+        // 阻止方向键、Home、End 的默认滚动行为
+        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(e.key)) {
+          e.preventDefault();
+        }
+        
+        if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A' || e.key === 'ArrowUp') {
+          goPrev();
+        }
+        if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D' || e.key === 'ArrowDown') {
+          goNext();
+        }
+        if (e.key === 'Home') {
+          currentIndex = 0;
+          updateImage();
+        }
+        if (e.key === 'End') {
+          currentIndex = images.length - 1;
+          updateImage();
+        }
+      });
+
+      // 初始化显示第一张图
+      updateImage();
+    });
+  </script>
+</body>
+</html>
