@@ -4,93 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>一口一个小蛋糕 | 个人主页</title>
-  <!-- Tailwind CSS v3 -->
-  <script src="tailwindcss.js"></script>
-  <!-- Lucide 图标库 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="tailwind-config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          // 低饱和主色，高级不刺眼
-          colors: {
-            primary: '#4F46E5',
-            neutral: {
-              100: '#F5F7FA',
-              200: '#E4E7EC',
-              500: '#667085',
-              700: '#344054',
-              900: '#101828'
-            }
-          },
-          // 主流热门无衬线字体 Inter
-          fontFamily: {
-            inter: ['Inter', 'system-ui', 'sans-serif'],
-          },
-          // 统一圆角、阴影（现代UI标准参数）
-          borderRadius: {
-            'md': '8px',
-            'lg': '12px'
-          },
-          boxShadow: {
-            soft: '0 1px 2px rgba(0, 0, 0, 0.06)',
-            hover: '0 4px 12px rgba(0, 0, 0, 0.08)'
-          }
-        },
-      }
-    }
-  </script>
-  <style type="text/tailwindcss">
-    /* 全局平滑滚动 */
-    html {
-      scroll-behavior: smooth;
-    }
-    /* 全局基础样式 */
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background-color: #F5F7FA;
-      color: #344054;
-      -webkit-font-smoothing: antialiased;
-    }
-    /* 图片缩放动效 */
-    .scale-hover {
-      overflow: hidden;
-      transition: all 0.2s ease-out;
-    }
-    .scale-hover img {
-      transition: transform 0.3s ease-out;
-    }
-    .scale-hover:hover img {
-      transform: scale(1.05);
-    }
-    /* 默认隐藏的作品项 */
-    .gallery-hidden, .video-hidden, .music-hidden {
-      display: none;
-    }
-    .gallery-hidden.show, .video-hidden.show, .music-hidden.show {
-      display: block;
-    }
-    /* 卡片悬浮动效 */
-    .card-hover {
-      transition: all 0.2s ease-out;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-    }
-    .card-hover:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transform: translateY(-2px);
-    }
-    /* 图集封面容器 - 适配1500×2000 (3:4) 竖屏图片 */
-    .gallery-cover-container {
-      aspect-ratio: 3/4;
-      overflow: hidden;
-      background-color: #F5F7FA;
-    }
-    .gallery-cover-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  </style>
+  <style type="text/tailwindcss">@import "style.css";</style>
   </head>
 <body>
   <!-- 顶部导航 极简半透风格 -->
@@ -549,79 +466,6 @@
     <p class="text-neutral-400 text-sm">© 2026 小崔Stdio · Power By AI</p>
   </footer>
 
-  <!-- 初始化 Lucide 图标 -->
-  <script>
-    lucide.createIcons();
-    // 导航栏滚动样式微调
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      if(window.scrollY > 60) {
-        nav.classList.add('shadow-hover');
-      } else {
-        nav.classList.remove('shadow-hover');
-      }
-    });
-    
-    // 作品展开/收起功能
-    // 图片作品
-    const galleryToggle = document.getElementById('galleryToggle');
-    const galleryHiddenItems = document.querySelectorAll('.gallery-hidden');
-    galleryToggle?.addEventListener('click', () => {
-      galleryHiddenItems.forEach(item => {
-        item.classList.toggle('show');
-      });
-      const span = galleryToggle.querySelector('span');
-      const icon = galleryToggle.querySelector('i');
-      if(span && icon) {
-        if(galleryHiddenItems[0]?.classList.contains('show')) {
-          span.textContent = '收起';
-          icon.classList.add('rotate-180');
-        } else {
-          span.textContent = '查看更多';
-          icon.classList.remove('rotate-180');
-        }
-      }
-    });
-    
-    // 视频作品
-    const videoToggle = document.getElementById('videoToggle');
-    const videoHiddenItems = document.querySelectorAll('.video-hidden');
-    videoToggle?.addEventListener('click', () => {
-      videoHiddenItems.forEach(item => {
-        item.classList.toggle('show');
-      });
-      const span = videoToggle.querySelector('span');
-      const icon = videoToggle.querySelector('i');
-      if(span && icon) {
-        if(videoHiddenItems[0]?.classList.contains('show')) {
-          span.textContent = '收起';
-          icon.classList.add('rotate-180');
-        } else {
-          span.textContent = '查看更多';
-          icon.classList.remove('rotate-180');
-        }
-      }
-    });
-    
-    // 音乐作品
-    const musicToggle = document.getElementById('musicToggle');
-    const musicHiddenItems = document.querySelectorAll('.music-hidden');
-    musicToggle?.addEventListener('click', () => {
-      musicHiddenItems.forEach(item => {
-        item.classList.toggle('show');
-      });
-      const span = musicToggle.querySelector('span');
-      const icon = musicToggle.querySelector('i');
-      if(span && icon) {
-        if(musicHiddenItems[0]?.classList.contains('show')) {
-          span.textContent = '收起';
-          icon.classList.add('rotate-180');
-        } else {
-          span.textContent = '查看更多';
-          icon.classList.remove('rotate-180');
-        }
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
