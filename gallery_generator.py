@@ -61,7 +61,34 @@ def generate_gallery_detail(image_urls, title="作品集详情", output_file="ga
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="tailwind-config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
-  <style type="text/tailwindcss">@import "gallery-detail.css";</style>
+  <link rel="stylesheet" href="gallery-detail.css">
+  <!-- 主图整图显示的兜底样式：不经过 Tailwind 编译，本地 file:// 直接打开同样生效 -->
+  <style>
+    .portrait-container {{
+      width: 100%;
+      height: auto;
+      min-height: 240px;
+      background-color: #F5F7FA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }}
+    .portrait-container img {{
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: calc(100vh - 230px);
+      object-fit: contain;
+      cursor: zoom-in;
+    }}
+    @media (max-width: 1024px) {{
+      .portrait-container img {{ max-height: calc(100vh - 260px); }}
+    }}
+    #thumbnailContainer {{ max-height: calc(100vh - 230px) !important; }}
+  </style>
 </head>
 <body>
   <!-- 返回按钮 -->
@@ -126,6 +153,12 @@ def generate_gallery_detail(image_urls, title="作品集详情", output_file="ga
   <footer class="py-4 bg-neutral-900 text-center">
     <p class="text-neutral-500 text-xs">© 2026 小崔Stdio</p>
   </footer>
+
+  <!-- 全屏大图预览 -->
+  <div id="lightbox" hidden>
+    <img id="lightboxImg" src="" alt="预览大图">
+    <button id="lightboxClose" type="button" aria-label="关闭预览">&times;</button>
+  </div>
 
   <script>
     // 页面加载完成后执行
@@ -193,6 +226,27 @@ def generate_gallery_detail(image_urls, title="作品集详情", output_file="ga
       floatPrevBtn.addEventListener('click', goPrev);
       floatNextBtn.addEventListener('click', goNext);
 
+      // 点击主图全屏查看整张图
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxClose = document.getElementById('lightboxClose');
+
+      function openLightbox() {{
+        lightboxImg.src = mainImage.currentSrc || mainImage.src;
+        lightbox.hidden = false;
+      }}
+
+      function closeLightbox() {{
+        lightbox.hidden = true;
+        lightboxImg.src = '';
+      }}
+
+      mainImage.addEventListener('click', openLightbox);
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function(e) {{
+        if (e.target === lightbox) closeLightbox();
+      }});
+
       // 缩略图点击事件
       thumbnailBtns.forEach(function(btn, index) {{
         btn.addEventListener('click', function() {{
@@ -221,6 +275,9 @@ def generate_gallery_detail(image_urls, title="作品集详情", output_file="ga
         if (e.key === 'End') {{
           currentIndex = images.length - 1;
           updateImage();
+        }}
+        if (e.key === 'Escape' && !lightbox.hidden) {{
+          closeLightbox();
         }}
       }});
 
