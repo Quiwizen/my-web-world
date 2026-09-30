@@ -93,85 +93,10 @@
         <h2 class="text-3xl font-bold text-neutral-900 mb-3">视频作品</h2>
         <div class="w-12 h-0.5 bg-primary/60 mx-auto rounded-full"></div>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4" id="videoGrid">
-        <!-- 封面区域可替换为视频托管封面/iframe -->
-        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
-          <div class="video-frame">
-            <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=117298794862389&bvid=BV1JMeY61EfZ&cid=42037218584&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy"></iframe>
-          </div>
-          <div class="p-3">
-            <h3 class="text-sm font-medium text-neutral-900 truncate">视频标题</h3>
-          </div>
-        </div>
-        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
-          <div class="video-placeholder">
-            <i data-lucide="play-circle" class="w-10 h-10 text-primary/70"></i>
-          </div>
-          <div class="p-3">
-            <h3 class="text-sm font-medium text-neutral-900 truncate">视频标题</h3>
-          </div>
-        </div>
-        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
-          <div class="video-placeholder">
-            <i data-lucide="play-circle" class="w-10 h-10 text-primary/70"></i>
-          </div>
-          <div class="p-3">
-            <h3 class="text-sm font-medium text-neutral-900 truncate">视频标题</h3>
-          </div>
-        </div>
-        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
-          <div class="video-placeholder">
-            <i data-lucide="play-circle" class="w-10 h-10 text-primary/70"></i>
-          </div>
-          <div class="p-3">
-            <h3 class="text-sm font-medium text-neutral-900 truncate">视频标题</h3>
-          </div>
-        </div>
-        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
-          <div class="video-placeholder">
-            <i data-lucide="play-circle" class="w-10 h-10 text-primary/70"></i>
-          </div>
-          <div class="p-3">
-            <h3 class="text-sm font-medium text-neutral-900 truncate">视频标题</h3>
-          </div>
-        </div>
-        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100">
-          <div class="video-placeholder">
-            <i data-lucide="play-circle" class="w-10 h-10 text-primary/70"></i>
-          </div>
-          <div class="p-3">
-            <h3 class="text-sm font-medium text-neutral-900 truncate">视频标题</h3>
-          </div>
-        </div>
-        <!-- 更多视频 - 默认隐藏 -->
-        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100 video-hidden">
-          <div class="video-placeholder">
-            <i data-lucide="play-circle" class="w-10 h-10 text-primary/70"></i>
-          </div>
-          <div class="p-3">
-            <h3 class="text-sm font-medium text-neutral-900 truncate">视频标题</h3>
-          </div>
-        </div>
-        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100 video-hidden">
-          <div class="video-placeholder">
-            <i data-lucide="play-circle" class="w-10 h-10 text-primary/70"></i>
-          </div>
-          <div class="p-3">
-            <h3 class="text-sm font-medium text-neutral-900 truncate">视频标题</h3>
-          </div>
-        </div>
-        <div class="rounded-lg overflow-hidden card-hover bg-neutral-100 video-hidden">
-          <div class="video-placeholder">
-            <i data-lucide="play-circle" class="w-10 h-10 text-primary/70"></i>
-          </div>
-          <div class="p-3">
-            <h3 class="text-sm font-medium text-neutral-900 truncate">视频标题</h3>
-          </div>
-        </div>
-      </div>
+      <div class="module-mount" data-module="video"></div>
       <!-- 展开/收起按钮 -->
       <div class="text-center mt-8">
-        <a href="video.html" class="px-6 py-2 text-primary hover:bg-primary/10 rounded-md transition-colors inline-flex items-center gap-2">
+        <a href="/pages/video.html" class="px-6 py-2 text-primary hover:bg-primary/10 rounded-md transition-colors inline-flex items-center gap-2">
           <span>查看更多</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
@@ -186,65 +111,10 @@
         <h2 class="text-3xl font-bold text-neutral-900 mb-3">图片作品</h2>
         <div class="w-12 h-0.5 bg-primary/60 mx-auto rounded-full"></div>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="galleryGrid">
-        <!-- 图集封面 - 点击跳转到详情页 -->
-        <a href="gallery-detail.html" class="scale-hover rounded-lg overflow-hidden bg-white card-hover block">
-          <div class="gallery-cover-container">
-            <img src="https://i.ibb.co/cKTjkmYG/image.jpg" alt="kb 沥水卷帘" class="gallery-cover-img">
-          </div>
-          <div class="p-4 bg-white">
-            <h3 class="font-medium text-neutral-900 text-sm">kb 沥水卷帘</h3>
-            <p class="text-xs text-neutral-500 mt-1">27张图片</p>
-          </div>
-        </a>
-        <!-- 第二个图集 -->
-        <a href="gallery-detail2.html" class="scale-hover rounded-lg overflow-hidden bg-white card-hover block">
-          <div class="gallery-cover-container">
-            <img src="https://i.ibb.co/SD9v0Jrw/26.jpg" alt="bm 活底披萨烤盘" class="gallery-cover-img">
-          </div>
-          <div class="p-4 bg-white">
-            <h3 class="font-medium text-neutral-900 text-sm">bm 活底披萨烤盘</h3>
-            <p class="text-xs text-neutral-500 mt-1">28张图片</p>
-          </div>
-        </a>
-        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
-          <img src="https://picsum.photos/600/600?random=21" alt="作品" class="w-full h-56 object-cover">
-        </div>
-        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
-          <img src="https://picsum.photos/600/600?random=22" alt="作品" class="w-full h-56 object-cover">
-        </div>
-        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
-          <img src="https://picsum.photos/600/600?random=23" alt="作品" class="w-full h-56 object-cover">
-        </div>
-        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
-          <img src="https://picsum.photos/600/600?random=24" alt="作品" class="w-full h-56 object-cover">
-        </div>
-        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
-          <img src="https://picsum.photos/600/600?random=25" alt="作品" class="w-full h-56 object-cover">
-        </div>
-        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
-          <img src="https://picsum.photos/600/600?random=26" alt="作品" class="w-full h-56 object-cover">
-        </div>
-        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover">
-          <img src="https://picsum.photos/600/600?random=27" alt="作品" class="w-full h-56 object-cover">
-        </div>
-        <!-- 更多图片 - 默认隐藏 -->
-        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover gallery-hidden">
-          <img src="https://picsum.photos/600/600?random=28" alt="作品" class="w-full h-56 object-cover">
-        </div>
-        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover gallery-hidden">
-          <img src="https://picsum.photos/600/600?random=29" alt="作品" class="w-full h-56 object-cover">
-        </div>
-        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover gallery-hidden">
-          <img src="https://picsum.photos/600/600?random=30" alt="作品" class="w-full h-56 object-cover">
-        </div>
-        <div class="scale-hover rounded-lg overflow-hidden bg-white card-hover gallery-hidden">
-          <img src="https://picsum.photos/600/600?random=31" alt="作品" class="w-full h-56 object-cover">
-        </div>
-      </div>
+      <div class="module-mount" data-module="gallery"></div>
       <!-- 展开/收起按钮 -->
       <div class="text-center mt-8">
-        <a href="gallery.html" class="px-6 py-2 text-primary hover:bg-primary/10 rounded-md transition-colors inline-flex items-center gap-2">
+        <a href="/pages/gallery.html" class="px-6 py-2 text-primary hover:bg-primary/10 rounded-md transition-colors inline-flex items-center gap-2">
           <span>查看更多</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
@@ -261,155 +131,10 @@
         <p class="text-neutral-500 mt-6 max-w-xl mx-auto">旋律传递情感，音符编织梦想</p>
       </div>
 
-      <div class="music-grid">
-        <div class="music-card card-hover">
-          <div class="music-cover">
-            <div class="music-cover-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-            </div>
-            <div class="music-eq"><span></span><span></span><span></span><span></span></div>
-            <button class="music-play-btn" type="button" aria-label="播放">
-              <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
-            </button>
-            <div class="music-progress"><div class="music-progress-bar"></div></div>
-            <audio preload="metadata" src="https://file.garden/aiKTxQW0TE9uaxk7/music/210.mp3"></audio>
-          </div>
-          <div class="music-info">
-            <div class="music-title">210</div>
-            <div class="music-desc"><span>原创音乐</span><span class="music-time">00:00</span></div>
-          </div>
-        </div>
-
-        <div class="music-card card-hover">
-          <div class="music-cover">
-            <div class="music-cover-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-            </div>
-            <div class="music-eq"><span></span><span></span><span></span><span></span></div>
-            <button class="music-play-btn" type="button" title="暂无音频" aria-label="暂无音频" disabled>
-              <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
-            </button>
-            <div class="music-progress"><div class="music-progress-bar"></div></div>
-          </div>
-          <div class="music-info">
-            <div class="music-title">曲目名称 02</div>
-            <div class="music-desc"><span>曲风 / 创作时间</span><span class="music-time">--:--</span></div>
-          </div>
-        </div>
-
-        <div class="music-card card-hover">
-          <div class="music-cover">
-            <div class="music-cover-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-            </div>
-            <div class="music-eq"><span></span><span></span><span></span><span></span></div>
-            <button class="music-play-btn" type="button" title="暂无音频" aria-label="暂无音频" disabled>
-              <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
-            </button>
-            <div class="music-progress"><div class="music-progress-bar"></div></div>
-          </div>
-          <div class="music-info">
-            <div class="music-title">曲目名称 03</div>
-            <div class="music-desc"><span>曲风 / 创作时间</span><span class="music-time">--:--</span></div>
-          </div>
-        </div>
-
-        <div class="music-card card-hover">
-          <div class="music-cover">
-            <div class="music-cover-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-            </div>
-            <div class="music-eq"><span></span><span></span><span></span><span></span></div>
-            <button class="music-play-btn" type="button" title="暂无音频" aria-label="暂无音频" disabled>
-              <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
-            </button>
-            <div class="music-progress"><div class="music-progress-bar"></div></div>
-          </div>
-          <div class="music-info">
-            <div class="music-title">曲目名称 04</div>
-            <div class="music-desc"><span>曲风 / 创作时间</span><span class="music-time">--:--</span></div>
-          </div>
-        </div>
-
-        <div class="music-card card-hover">
-          <div class="music-cover">
-            <div class="music-cover-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-            </div>
-            <div class="music-eq"><span></span><span></span><span></span><span></span></div>
-            <button class="music-play-btn" type="button" title="暂无音频" aria-label="暂无音频" disabled>
-              <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
-            </button>
-            <div class="music-progress"><div class="music-progress-bar"></div></div>
-          </div>
-          <div class="music-info">
-            <div class="music-title">曲目名称 05</div>
-            <div class="music-desc"><span>曲风 / 创作时间</span><span class="music-time">--:--</span></div>
-          </div>
-        </div>
-
-        <div class="music-card card-hover">
-          <div class="music-cover">
-            <div class="music-cover-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-            </div>
-            <div class="music-eq"><span></span><span></span><span></span><span></span></div>
-            <button class="music-play-btn" type="button" title="暂无音频" aria-label="暂无音频" disabled>
-              <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
-            </button>
-            <div class="music-progress"><div class="music-progress-bar"></div></div>
-          </div>
-          <div class="music-info">
-            <div class="music-title">曲目名称 06</div>
-            <div class="music-desc"><span>曲风 / 创作时间</span><span class="music-time">--:--</span></div>
-          </div>
-        </div>
-
-        <div class="music-card card-hover music-hidden">
-          <div class="music-cover">
-            <div class="music-cover-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-            </div>
-            <div class="music-eq"><span></span><span></span><span></span><span></span></div>
-            <button class="music-play-btn" type="button" title="暂无音频" aria-label="暂无音频" disabled>
-              <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
-            </button>
-            <div class="music-progress"><div class="music-progress-bar"></div></div>
-          </div>
-          <div class="music-info">
-            <div class="music-title">曲目名称 07</div>
-            <div class="music-desc"><span>曲风 / 创作时间</span><span class="music-time">--:--</span></div>
-          </div>
-        </div>
-
-        <div class="music-card card-hover music-hidden">
-          <div class="music-cover">
-            <div class="music-cover-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-            </div>
-            <div class="music-eq"><span></span><span></span><span></span><span></span></div>
-            <button class="music-play-btn" type="button" title="暂无音频" aria-label="暂无音频" disabled>
-              <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
-            </button>
-            <div class="music-progress"><div class="music-progress-bar"></div></div>
-          </div>
-          <div class="music-info">
-            <div class="music-title">曲目名称 08</div>
-            <div class="music-desc"><span>曲风 / 创作时间</span><span class="music-time">--:--</span></div>
-          </div>
-        </div>
-      </div>
+      <div class="module-mount" data-module="music"></div>
       <!-- 展开/收起按钮 -->
       <div class="text-center mt-8">
-        <a href="music.html" class="px-6 py-2 text-primary hover:bg-primary/10 rounded-md transition-colors inline-flex items-center gap-2">
+        <a href="/pages/music.html" class="px-6 py-2 text-primary hover:bg-primary/10 rounded-md transition-colors inline-flex items-center gap-2">
           <span>查看更多</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>

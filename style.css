@@ -40,6 +40,11 @@ body {
   transform: translateY(-2px);
 }
 
+/* 首页模块挂载点：占位高度，避免 fetch 注入前区块塌陷 */
+.module-mount {
+  min-height: 160px;
+}
+
 .gallery-cover-container {
   aspect-ratio: 3/4;
   overflow: hidden;
@@ -84,6 +89,16 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #E4E7EC;
+}
+
+/* 横屏（含桌面宽屏）：视频模块一行四个并整体居中 */
+@media (orientation: landscape) {
+  .video-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    max-width: 1080px;
+    margin-inline: auto;
+    justify-content: center;
+  }
 }
 
 /* ===== 音乐作品：方形卡片 ===== */

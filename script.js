@@ -127,3 +127,52 @@ function setupMusicCards() {
 }
 
 setupMusicCards();
+
+/* ===== 首页模块：从 pages/ 拉取二级页面内容并注入对应区块 ===== */
+function injectModule(mount) {
+  const name = mount.getAttribute('data-module');
+  const url = 'pages/' + name + '.html';
+  return fetch(url)
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+    .then(html => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const grid = doc.getElementById('moduleGrid');
+      if (!grid) throw new Error('未找到 #moduleGrid');
+      // 首页只展示每个模块的前 8 个卡片
+      const items = Array.from(grid.children).slice(0, 8);
+      grid.innerHTML = '';
+      items.forEach(it => grid.appendChild(it));
+      grid.removeAttribute('id');
+      mount.innerHTML = '';
+      mount.appendChild(document.importNode(grid, true));
+    });
+}
+
+function loadHomeModules() {
+  const mounts = Array.from(document.querySelectorAll('.module-mount'));
+  if (!mounts.length) return;
+
+  if (location.protocol === 'file:') {
+    mounts.forEach(m => {
+      m.innerHTML = '<p class="col-span-full text-center text-neutral-500 text-sm py-10">请通过本地服务器打开本页（终端运行 ' +
+        '<code>python3 -m http.server</code> 后访问 http://localhost:8000），直接双击文件无法加载模块内容。</p>';
+    });
+    return;
+  }
+
+  Promise.all(mounts.map(injectModule))
+    .then(() => {
+      try { if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') lucide.createIcons(); } catch (e) {}
+      setupMusicCards();
+    })
+    .catch(err => {
+      console.error('[home] 模块加载失败：', err);
+      mounts.forEach(m => {
+        if (!m.children.length) {
+          m.innerHTML = '<p class="col-span-full text-center text-neutral-500 text-sm py-10">模块加载失败，请确认 pages/ 目录存在并通过本地服务器访问。</p>';
+        }
+      });
+    });
+}
+
+loadHomeModules();
